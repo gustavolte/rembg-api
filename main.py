@@ -7,17 +7,15 @@ import io
 app = FastAPI()
 
 @app.get("/")
+@app.head("/")
 def home():
-    return {"status": "ok"}
-    
+    return Response(status_code=200)
+
 @app.post("/remove-bg")
 async def remove_background(file: UploadFile = File(...)):
     contents = await file.read()
     input_image = Image.open(io.BytesIO(contents))
-    
-    # Reduz imagem se for muito grande
     input_image.thumbnail((800, 800))
-    
     output_image = remove(input_image)
     buf = io.BytesIO()
     output_image.save(buf, format="PNG")
