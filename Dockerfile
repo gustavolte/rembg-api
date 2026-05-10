@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     libxrender1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir rembg fastapi uvicorn python-multipart pillow
+RUN pip install --no-cache-dir "rembg[cpu]" fastapi uvicorn python-multipart pillow
 
 COPY . .
 
